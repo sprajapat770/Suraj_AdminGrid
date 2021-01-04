@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Suraj_AdminGrid::admingrid" title="Admin Grid" module="Suraj_AdminGrid" sortOrder="51" resource="Suraj_AdminGrid::admingrid"/>
+        <add id="Suraj_AdminGrid::post" title="Manage Posts" module="Suraj_AdminGrid" sortOrder="10" action="suraj_admingrid/post/index" resource="Suraj_AdminGrid::post" parent="Suraj_AdminGrid::admingrid"/>
+    </menu>
+</config>
