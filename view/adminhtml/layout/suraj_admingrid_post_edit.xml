@@ -2,7 +2,7 @@
     <update handle="styles"/>
     <body>
         <referenceContainer name="content">
-            <uiComponent name="suraj_admingrid_post_listing"/>
+            <uiComponent name="new_post_form"/>
         </referenceContainer>
     </body>
 </page>

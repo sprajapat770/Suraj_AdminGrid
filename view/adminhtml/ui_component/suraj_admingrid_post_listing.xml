@@ -20,9 +20,75 @@
                 <item name="sticky" xsi:type="boolean">true</item>
             </item>
         </argument>
+        <filterSearch name="fulltext"/>
         <exportButton name="export_button"/>
         <bookmark name="bookmarks"/>
         <columnsControls name="columns_controls"/>
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="*/*/massDelete"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete items</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you want to delete selected items?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="status">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">status</item>
+                        <item name="label" xsi:type="string" translate="true">Change status</item>
+                    </item>
+                </argument>
+                <argument name="actions" xsi:type="array">
+                    <item name="0" xsi:type="array">
+                        <item name="type" xsi:type="string">enable</item>
+                        <item name="label" xsi:type="string" translate="true">Enable</item>
+                        <item name="url" xsi:type="url" path="*/*/massStatus">
+                            <param name="status">1</param>
+                        </item>
+                    </item>
+                    <item name="1" xsi:type="array">
+                        <item name="type" xsi:type="string">disable</item>
+                        <item name="label" xsi:type="string" translate="true">Disable</item>
+                        <item name="url" xsi:type="url" path="*/*/massStatus">
+                            <param name="status">0</param>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </filters>
+        <paging name="listing_paging">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sizesConfig" xsi:type="array">
+                        <item name="component" xsi:type="string">Magento_Ui/js/grid/paging/sizes</item>
+                        <item name="template" xsi:type="string">ui/grid/paging/sizes</item>
+                        <item name="maxSize" xsi:type="number">500</item>
+                        <item name="minSize" xsi:type="number">5</item>
+                    </item>
+                </item>
+            </argument>
+        </paging>
     </listingToolbar>
     <dataSource name="suraj_admingrid_post_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
@@ -42,6 +108,53 @@
         </argument>
     </dataSource>
     <columns name="spinner_columns">
+        <!-- <argument name="data" xsi:type="array">
+            <item name="editorConfig" xsi:type="array">
+                <item name="selectProvider" xsi:type="string">suraj_admingrid_post_listing.suraj_admingrid_post_listing.spinner_columns.ids</item>
+                <item name="enabled" xsi:type="boolean">true</item>
+                <item name="indexField" xsi:type="string">post_id</item>
+                <item name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="*/*/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </item>
+            </item>
+            <item name="childDefaults" xsi:type="array">
+                <item name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">suraj_admingrid_post_listing.suraj_admingrid_post_listing.spinner_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            <item name="storageConfig" xsi:type="array">
+                <item name="provider" xsi:type="string">suraj_admingrid_post_listing.suraj_admingrid_post_listing.listing_top.bookmarks</item>
+                <item name="root" xsi:type="string">columns.${ $.index }</item>
+                <item name="namespace" xsi:type="string">current.${ $.storageConfig.root }</item>
+            </item>
+        </item>
+    </argument> -->
+        <settings>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="*/*/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="indexField" xsi:type="string">post_id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+                <param name="selectProvider" xsi:type="string">suraj_admingrid_post_listing.suraj_admingrid_post_listing.spinner_columns_editor.ids</param>
+            </editorConfig>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">suraj_admingrid_post_listing.suraj_admingrid_post_listing.spinner_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
         <selectionsColumn name="ids">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -60,6 +173,24 @@
                 </item>
             </argument>
         </column>
+        <column name="featured_image" component="Magento_Ui/js/grid/columns/image-preview">
+            <settings>
+                <label translate="true">Image Preview</label>
+                <visible>true</visible>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <!-- <column name="image" class="Suraj\AdminGrid\Ui\Component\Listing\Column\Thumbnail">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="altField" xsi:type="string">title</item>
+                    <item name="has_preview" xsi:type="string">1</item>
+                    <item name="label" xsi:type="string" translate="true">Thumbnail</item>
+                </item>
+            </argument>
+        </column> -->
         <column name="name">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -79,10 +210,35 @@
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
                     <item name="dataType" xsi:type="string">text</item>
+                    <item name="editor" xsi:type="array">
+                        <item name="editorType" xsi:type="string">text</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
                     <item name="label" xsi:type="string" translate="true">Post Content</item>
                 </item>
             </argument>
         </column>
+        <column name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Suraj\AdminGrid\Ui\Component\Listing\Column\Status</item><item name="config" xsi:type="array">
+                <item name="filter" xsi:type="string">select</item> <item name="label" translate="true" xsi:type="string">Status</item>
+                <item name="component" xsi:type="string">Suraj_AdminGrid/js/grid/columns/select</item>
+                <item name="dataType" xsi:type="string">select</item>
+                <item name="editor" xsi:type="array">
+                    <item name="editorType" xsi:type="string">select</item>
+                </item>
+            </item>
+            </argument>
+        </column>
+        <actionsColumn name="actions" class="Suraj\AdminGrid\Ui\Component\Listing\Column\Actions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">post_id</item>
+                </item>
+            </argument>
+        </actionsColumn>
         <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
