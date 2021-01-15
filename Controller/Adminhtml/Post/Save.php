@@ -1,8 +1,5 @@
 <?php
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
+
 namespace Suraj\AdminGrid\Controller\Adminhtml\Post;
 
 use Magento\Framework\App\Action\HttpPostActionInterface;
@@ -45,7 +42,7 @@ class Save extends \Magento\Backend\App\Action
         $data = $this->getRequest()->getPostValue();
 
         if ($data) {
-            $id = $this->getRequest()->getParam('post_id');
+            //$id = $this->getRequest()->getParam('post_id');
 
             $model = $this->_objectManager->create(\Suraj\AdminGrid\Model\Post::class);
             // if (!$model->getId() && $id) {
@@ -61,7 +58,7 @@ class Save extends \Magento\Backend\App\Action
                 $this->dataPersistor->clear('new_post');
 
                 if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['post_id' => $model->getId()]);
+                    return $resultRedirect->setPath('*/*/add', ['post_id' => $model->getId()]);
                 }
                 return $resultRedirect->setPath('*/*/');
             } catch (LocalizedException $e) {

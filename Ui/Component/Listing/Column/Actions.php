@@ -11,8 +11,8 @@ use Magento\Framework\UrlInterface;
 class Actions extends Column
 {
     /** Url path */
-    const URL_PATH_EDIT = '*/*/edit';
-    const URL_PATH_DELETE = '*/*/delete';
+    const URL_PATH_EDIT = 'suraj_admingrid/post/edit';
+    const URL_PATH_DELETE = '*/post/delete';
 
     /** @var UrlInterface */
     protected $urlBuilder;
