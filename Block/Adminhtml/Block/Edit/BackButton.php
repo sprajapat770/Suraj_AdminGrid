@@ -2,12 +2,26 @@
 
 namespace Suraj\AdminGrid\Block\Adminhtml\Block\Edit;
 
+use Magento\Backend\Block\Widget\Context;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 use Magento\Ui\Component\Control\Container;
 
 
 class BackButton implements ButtonProviderInterface
 {
+
+    /**
+     * @var Context
+     */
+    protected $context;
+
+    public function __construct(
+        Context $context
+    ) {
+        $this->context = $context;
+    }
+
+
     /**
      * @return array
      */
@@ -29,5 +43,10 @@ class BackButton implements ButtonProviderInterface
     public function getBackUrl()
     {
         return $this->getUrl('*/*/');
+    }
+
+    public function getUrl($route = '', $params = [])
+    {
+        return $this->context->getUrlBuilder()->getUrl($route, $params);
     }
 }

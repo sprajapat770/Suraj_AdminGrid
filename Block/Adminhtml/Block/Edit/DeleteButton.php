@@ -14,7 +14,7 @@ class DeleteButton implements ButtonProviderInterface
     public function getButtonData()
     {
         $data = [];
-        if ($this->getPostId()) {
+        /*if ($this->getPostId()) {
             $data = [
                 'label' => __('Delete Block'),
                 'class' => 'delete',
@@ -23,7 +23,7 @@ class DeleteButton implements ButtonProviderInterface
                 ) . '\', \'' . $this->getDeleteUrl() . '\', {"data": {}})',
                 'sort_order' => 20,
             ];
-        }
+        }*/
         return $data;
     }
 
